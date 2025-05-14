@@ -1,0 +1,56 @@
+# MARK: - ⚙️ Xcode Core
+.DS_Store
+*.swp
+*.lock
+*.xcuserstate
+
+# Ignore user-specific Xcode data
+xcuserdata/
+*.xcuserdatad/
+
+# Ignore build products
+build/
+DerivedData/
+
+# MARK: - 📦 Project Files
+# Include the project file but ignore unshared schemes
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcodeproj/xcuserdata/
+
+# Include workspace metadata
+!*.xcworkspace/contents.xcworkspacedata
+*.xcworkspace/xcuserdata/
+
+# MARK: - 📱 Firebase
+# Allow including GoogleService-Info.plist only in private repos
+# If public repo, uncomment the next line to ignore it
+# GoogleService-Info.plist
+
+# MARK: - 🧪 Testing & Debug
+*.moved-aside
+*.xcscmblueprint
+*.xccheckout
+
+# MARK: - 💼 Package Managers
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods (optional if you use it)
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# MARK: - 🎮 Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# MARK: - 🔄 Fastlane (if used)
+fastlane/report.xml
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/Preview.html
