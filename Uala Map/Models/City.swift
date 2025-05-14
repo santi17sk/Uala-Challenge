@@ -7,7 +7,7 @@
 
 import Foundation
 
-class City {
+class City: Identifiable {
     let id: Int
     let name: String
     let country: String
