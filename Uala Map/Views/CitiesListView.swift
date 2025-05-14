@@ -9,31 +9,54 @@ import SwiftUI
 
 struct CitiesListView: View {
     @StateObject var viewModel = CitiesListViewModel()
+    @State private var selectedCity: City?
+    @State private var navigateToMap: Bool = false
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 0) {
-                ForEach(viewModel.cities) { city in
-                    CityRowView(
-                        city: city,
-                        onFavoriteToggle: {
-                            print("add to favorite \(city.name)")
-                        },
-                        onInfoTapped: {
-                            print("info tapped for \(city.name)")
-                        },
-                        onRowTapped: {
-                            print("row tapped for \(city.name)")
+        NavigationSplitView {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(viewModel.cities) { city in
+                        CityRowView(
+                            city: city,
+                            onFavoriteToggle: {
+                                print("add to favorite \(city.name)")
+                            },
+                            onInfoTapped: {
+                                print("info tapped for \(city.name)")
+                            },
+                            onRowTapped: {
+                                selectedCity = city
+                                if horizontalSizeClass == .compact {
+                                    navigateToMap = true
+                                }
+                            }
+                        )
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                        .background(Color(uiColor: .systemBackground))
+                        
+                        if city.id != viewModel.cities.last?.id {
+                            Divider()
                         }
-                    )
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(Color(uiColor: .systemBackground))
-                    
-                    if city.id != viewModel.cities.last?.id {
-                        Divider()
                     }
                 }
+            }
+            .navigationTitle("Cities")
+            .navigationDestination(isPresented: $navigateToMap) {
+                if let city = selectedCity {
+                    CityMapView(city: city)
+                }
+            }
+        } detail: {
+            if let city = selectedCity {
+                CityMapView(city: city)
+                    .id(city.id)
+            } else {
+                Text("Select a city")
+                    .font(.title)
+                    .foregroundColor(.secondary)
             }
         }
         .task {
