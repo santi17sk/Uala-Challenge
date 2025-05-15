@@ -7,9 +7,11 @@
 
 import Foundation
 
+@MainActor
 final class CitiesListViewModel: ObservableObject {
     @Published private(set) var cities: [City] = []
     @Published private(set) var isLoading: Bool = false
+    @Published private(set) var loadError: Bool = false
     
     private let repository: CitiesRepository
     private let favouritesStore: FavouritesStore
@@ -24,12 +26,19 @@ final class CitiesListViewModel: ObservableObject {
     
     func loadCities() async {
         isLoading = true
+        loadError = false
         defer { isLoading = false }
         
         do {
             cities = try await repository.fetchCities()
         } catch {
-            print("Error loading cities: \(error)")
+            loadError = true
+        }
+    }
+    
+    func reloadCities() {
+        Task {
+            await loadCities()
         }
     }
 }

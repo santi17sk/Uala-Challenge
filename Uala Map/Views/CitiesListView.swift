@@ -59,6 +59,13 @@ struct CitiesListView: View {
                     CityMapView(city: city)
                 }
             }
+            .overlay {
+                if viewModel.loadError {
+                    ConnectionErrorView {
+                        viewModel.reloadCities()
+                    }
+                }
+            }
         } detail: {
             if let city = selectedCity {
                 CityMapView(city: city)
