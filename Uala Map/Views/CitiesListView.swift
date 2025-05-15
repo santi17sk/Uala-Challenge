@@ -30,7 +30,7 @@ struct CitiesListView: View {
                             CityRowView(
                                 city: city,
                                 onFavoriteToggle: {
-                                    print("add to favorite \(city.name)")
+                                    viewModel.toggleFavorite(for: city)
                                 },
                                 onInfoTapped: {
                                     selectedCityForInfo = city

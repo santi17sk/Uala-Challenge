@@ -19,6 +19,8 @@ final class CitiesListViewModel: ObservableObject {
     
     private let repository: CitiesRepository
     private let favouritesStore: FavouritesStore
+    private var favouriteIDs: Set<Int> = []
+    
     private var trie: CityTrie?
     private var displayedCities: [City] = []
     private var cities: [City] = []
@@ -42,6 +44,8 @@ final class CitiesListViewModel: ObservableObject {
         
         do {
             cities = try await repository.fetchCities()
+            loadFavourites()
+            applyFavourites()
             displayedCities = Array(cities.prefix(pageSize))
             currentPage = 1
             
@@ -103,5 +107,32 @@ final class CitiesListViewModel: ObservableObject {
         }
         searchWorkItem = task
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: task)
+    }
+    
+    func toggleFavorite(for city: City) {
+        guard let index = cities.firstIndex(where: { $0.id == city.id }) else { return }
+        cities[index].isFavorite.toggle()
+        
+        if cities[index].isFavorite {
+            favouriteIDs.insert(cities[index].id)
+        } else {
+            favouriteIDs.remove(cities[index].id)
+        }
+        applyFilters()
+        saveFavourites()
+    }
+    
+    private func saveFavourites() {
+        favouritesStore.save(favouriteIDs)
+    }
+    
+    private func loadFavourites() {
+        favouriteIDs = favouritesStore.get()
+    }
+    
+    private func applyFavourites() {
+        for i in 0..<cities.count {
+            cities[i].isFavorite = favouriteIDs.contains(cities[i].id)
+        }
     }
 }
