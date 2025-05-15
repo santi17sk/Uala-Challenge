@@ -69,7 +69,9 @@ struct CitiesListView: View {
                         viewModel.reloadCities()
                     }
                 } else if viewModel.filteredCities.isEmpty {
-                    if !viewModel.isLoading {
+                    if !viewModel.searchText.isEmpty {
+                        ContentUnavailableView.search(text: viewModel.searchText)
+                    } else if !viewModel.isLoading {
                         ContentUnavailableView(
                             "No Cities",
                             systemImage: "globe",
