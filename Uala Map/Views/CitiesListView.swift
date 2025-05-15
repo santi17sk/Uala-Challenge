@@ -10,6 +10,7 @@ import SwiftUI
 struct CitiesListView: View {
     @StateObject var viewModel = CitiesListViewModel()
     @State private var selectedCity: City?
+    @State private var selectedCityForInfo: City?
     @State private var navigateToMap: Bool = false
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
@@ -24,7 +25,7 @@ struct CitiesListView: View {
                                 print("add to favorite \(city.name)")
                             },
                             onInfoTapped: {
-                                print("info tapped for \(city.name)")
+                                selectedCityForInfo = city
                             },
                             onRowTapped: {
                                 selectedCity = city
@@ -58,6 +59,9 @@ struct CitiesListView: View {
                     .font(.title)
                     .foregroundColor(.secondary)
             }
+        }
+        .sheet(item: $selectedCityForInfo) { city in
+            CityDetailView(city: city)
         }
         .task {
             await viewModel.loadCities()
