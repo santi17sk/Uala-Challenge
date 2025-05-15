@@ -26,7 +26,7 @@ struct CitiesListView: View {
                                 .background(Color(uiColor: .systemBackground))
                         }
                     } else {
-                        ForEach(viewModel.cities) { city in
+                        ForEach(viewModel.filteredCities) { city in
                             CityRowView(
                                 city: city,
                                 onFavoriteToggle: {
@@ -45,8 +45,11 @@ struct CitiesListView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 8)
                             .background(Color(uiColor: .systemBackground))
+                            .onAppear {
+                                viewModel.loadMoreIfNeeded(currentItem: city)
+                            }
                             
-                            if city.id != viewModel.cities.last?.id {
+                            if city.id != viewModel.filteredCities.last?.id {
                                 Divider()
                             }
                         }
@@ -54,6 +57,7 @@ struct CitiesListView: View {
                 }
             }
             .navigationTitle("Cities")
+            .searchable(text: $viewModel.searchText)
             .navigationDestination(isPresented: $navigateToMap) {
                 if let city = selectedCity {
                     CityMapView(city: city)
@@ -64,7 +68,7 @@ struct CitiesListView: View {
                     ConnectionErrorView {
                         viewModel.reloadCities()
                     }
-                } else if viewModel.cities.isEmpty {
+                } else if viewModel.filteredCities.isEmpty {
                     if !viewModel.isLoading {
                         ContentUnavailableView(
                             "No Cities",
