@@ -64,6 +64,14 @@ struct CitiesListView: View {
                     ConnectionErrorView {
                         viewModel.reloadCities()
                     }
+                } else if viewModel.cities.isEmpty {
+                    if !viewModel.isLoading {
+                        ContentUnavailableView(
+                            "No Cities",
+                            systemImage: "globe",
+                            description: Text("There are no cities to show.")
+                        )
+                    }
                 }
             }
         } detail: {
