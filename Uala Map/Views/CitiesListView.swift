@@ -58,6 +58,14 @@ struct CitiesListView: View {
             }
             .navigationTitle("Cities")
             .searchable(text: $viewModel.searchText)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Toggle(isOn: $viewModel.showFavoritesOnly) {
+                        Image(systemName: viewModel.showFavoritesOnly ? "star.fill" : "star")
+                            .foregroundColor(.yellow)
+                    }
+                }
+            }
             .navigationDestination(isPresented: $navigateToMap) {
                 if let city = selectedCity {
                     CityMapView(city: city)
@@ -69,7 +77,13 @@ struct CitiesListView: View {
                         viewModel.reloadCities()
                     }
                 } else if viewModel.filteredCities.isEmpty {
-                    if !viewModel.searchText.isEmpty {
+                    if viewModel.showFavoritesOnly {
+                        ContentUnavailableView(
+                            "No Favorites",
+                            systemImage: "star.slash",
+                            description: Text("You haven't marked any city as favorite yet.")
+                        )
+                    } else if !viewModel.searchText.isEmpty {
                         ContentUnavailableView.search(text: viewModel.searchText)
                     } else if !viewModel.isLoading {
                         ContentUnavailableView(

@@ -13,6 +13,10 @@ final class CitiesListViewModel: ObservableObject {
         didSet { debounceSearch() }
     }
     
+    @Published var showFavoritesOnly: Bool = false {
+        didSet { applyFilters() }
+    }
+    
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var loadError: Bool = false
     @Published private(set) var filteredCities: [City] = []
@@ -91,9 +95,14 @@ final class CitiesListViewModel: ObservableObject {
             let matchingIds = Set(trie?.search(prefix: trimmedSearch).map { $0.id } ?? [])
             filteredCities = cities
                 .filter { matchingIds.contains($0.id) }
+                .filter { !showFavoritesOnly || $0.isFavorite }
                 .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
                 .prefix(100)
                 .map { $0 }
+        } else if showFavoritesOnly {
+            filteredCities = cities
+                .filter { $0.isFavorite }
+                .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         } else {
             filteredCities = displayedCities
                 .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
