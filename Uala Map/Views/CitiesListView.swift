@@ -18,28 +18,37 @@ struct CitiesListView: View {
         NavigationSplitView {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(viewModel.cities) { city in
-                        CityRowView(
-                            city: city,
-                            onFavoriteToggle: {
-                                print("add to favorite \(city.name)")
-                            },
-                            onInfoTapped: {
-                                selectedCityForInfo = city
-                            },
-                            onRowTapped: {
-                                selectedCity = city
-                                if horizontalSizeClass == .compact {
-                                    navigateToMap = true
+                    if viewModel.isLoading {
+                        ForEach(0..<5, id: \.self) { _ in
+                            CitySkeletonRowView()
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                                .background(Color(uiColor: .systemBackground))
+                        }
+                    } else {
+                        ForEach(viewModel.cities) { city in
+                            CityRowView(
+                                city: city,
+                                onFavoriteToggle: {
+                                    print("add to favorite \(city.name)")
+                                },
+                                onInfoTapped: {
+                                    selectedCityForInfo = city
+                                },
+                                onRowTapped: {
+                                    selectedCity = city
+                                    if horizontalSizeClass == .compact {
+                                        navigateToMap = true
+                                    }
                                 }
+                            )
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                            .background(Color(uiColor: .systemBackground))
+                            
+                            if city.id != viewModel.cities.last?.id {
+                                Divider()
                             }
-                        )
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
-                        .background(Color(uiColor: .systemBackground))
-                        
-                        if city.id != viewModel.cities.last?.id {
-                            Divider()
                         }
                     }
                 }

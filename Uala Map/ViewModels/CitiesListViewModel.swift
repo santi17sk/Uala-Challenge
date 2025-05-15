@@ -9,6 +9,7 @@ import Foundation
 
 final class CitiesListViewModel: ObservableObject {
     @Published private(set) var cities: [City] = []
+    @Published private(set) var isLoading: Bool = false
     
     private let repository: CitiesRepository
     private let favouritesStore: FavouritesStore
@@ -22,6 +23,9 @@ final class CitiesListViewModel: ObservableObject {
     }
     
     func loadCities() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             cities = try await repository.fetchCities()
         } catch {
