@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		EAB89B012DD674A4007B62CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAB89A0B2DD521AB007B62CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAB89A122DD521AB007B62CA;
+			remoteInfo = "Uala Map";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		EAB89A132DD521AB007B62CA /* Uala Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uala Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAB89AFD2DD674A4007B62CA /* Uala MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Uala MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = "Uala Map";
 			sourceTree = "<group>";
 		};
+		EAB89AFE2DD674A4007B62CA /* Uala MapTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Uala MapTests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EAB89A102DD521AB007B62CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAB89AFA2DD674A4007B62CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				EAB89A152DD521AB007B62CA /* Uala Map */,
+				EAB89AFE2DD674A4007B62CA /* Uala MapTests */,
 				EAB89A142DD521AB007B62CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				EAB89A132DD521AB007B62CA /* Uala Map.app */,
+				EAB89AFD2DD674A4007B62CA /* Uala MapTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = EAB89A132DD521AB007B62CA /* Uala Map.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EAB89AFC2DD674A4007B62CA /* Uala MapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAB89B052DD674A4007B62CA /* Build configuration list for PBXNativeTarget "Uala MapTests" */;
+			buildPhases = (
+				EAB89AF92DD674A4007B62CA /* Sources */,
+				EAB89AFA2DD674A4007B62CA /* Frameworks */,
+				EAB89AFB2DD674A4007B62CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAB89B022DD674A4007B62CA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EAB89AFE2DD674A4007B62CA /* Uala MapTests */,
+			);
+			name = "Uala MapTests";
+			packageProductDependencies = (
+			);
+			productName = "Uala MapTests";
+			productReference = EAB89AFD2DD674A4007B62CA /* Uala MapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					EAB89A122DD521AB007B62CA = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					EAB89AFC2DD674A4007B62CA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = EAB89A122DD521AB007B62CA;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				EAB89A122DD521AB007B62CA /* Uala Map */,
+				EAB89AFC2DD674A4007B62CA /* Uala MapTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EAB89A112DD521AB007B62CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAB89AFB2DD674A4007B62CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EAB89AF92DD674A4007B62CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAB89B022DD674A4007B62CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAB89A122DD521AB007B62CA /* Uala Map */;
+			targetProxy = EAB89B012DD674A4007B62CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EAB89A1F2DD521AD007B62CA /* Debug */ = {
@@ -304,6 +379,42 @@
 			};
 			name = Release;
 		};
+		EAB89B032DD674A4007B62CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3TQUP2J7U5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "santi17Sk.Uala-MapTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uala Map.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Uala Map";
+			};
+			name = Debug;
+		};
+		EAB89B042DD674A4007B62CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3TQUP2J7U5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "santi17Sk.Uala-MapTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uala Map.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Uala Map";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -321,6 +432,15 @@
 			buildConfigurations = (
 				EAB89A222DD521AD007B62CA /* Debug */,
 				EAB89A232DD521AD007B62CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAB89B052DD674A4007B62CA /* Build configuration list for PBXNativeTarget "Uala MapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAB89B032DD674A4007B62CA /* Debug */,
+				EAB89B042DD674A4007B62CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
